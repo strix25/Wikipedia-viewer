@@ -1,0 +1,53 @@
+body{
+    font-family: Arial Verdana, sans-serif;
+    background: lightseagreen;
+}
+
+
+.centered {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    margin-top: -50px;
+    margin-left: -100px;
+  }
+
+input[type=text] {
+    width: 130px;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: white;
+    background-image: url('https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-ios7-search-strong-128.png');
+    background-size: 26px;
+    background-position: 10px 10px; 
+    background-repeat: no-repeat;
+    padding: 12px 20px 12px 40px;
+    -webkit-transition: width 0.4s ease-in-out;
+    transition: width 0.4s ease-in-out;
+    margin-top: 10px;
+}
+
+input[type=text]:focus {
+    width: 100%;
+}
+
+input[type=text]:hover {
+    width: 100%;
+}
+
+#rndWiki{
+    text-decoration: none;
+    color: blue;
+    display:inline-block;
+    font-size: 30px;
+    
+}
+
+#rndIcon{
+    display:inline-block;
+    height:30px;
+    cursor: pointer;
+}
+
