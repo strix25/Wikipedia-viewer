@@ -1,7 +1,14 @@
-function potato(lat, long){
-    console.log(typeof(long));
+var randomBtn = document.getElementById("random");
+randomBtn.onclick = function (){
+    var win = window.open("https://en.wikipedia.org/wiki/Special:Random", '_blank');
+    win.focus();
+}
 
-    //let link = `https://fcc-weather-api.glitch.me/api/current?lat=46.5546503&lon=15.6458812`;
+
+function potato(lat, long){
+    
+
+   
     let link = `https://fcc-weather-api.glitch.me/api/current?lon=${long}&lat=${lat}`;
     var xhr = new XMLHttpRequest();
     xhr.open('GET', link);
@@ -24,19 +31,19 @@ function potato(lat, long){
             console.log("second part");
         }
     };
-    xhr.send(null);
+    xhr.send(null);     
 }
   
-mes.onclick = function(){
+// mes.onclick = function(){
     
-    let currentTempUnit = mes.innerHTML;
-    let newTempUnit = currentTempUnit == "C" ? "F" : "C";
-    mes.innerHTML = newTempUnit;
+//     let currentTempUnit = mes.innerHTML;
+//     let newTempUnit = currentTempUnit == "C" ? "F" : "C";
+//     mes.innerHTML = newTempUnit;
 
-    if(newTempUnit == "F"){
-        let fahTemp = Math.round(parseInt(temp.innerHTML)*9 / 5 + 32);
-        temp.innerHTML = fahTemp;
-    }else{
-        temp.innerHTML = currentTempInCels;
-    }
-};
+//     if(newTempUnit == "F"){
+//         let fahTemp = Math.round(parseInt(temp.innerHTML)*9 / 5 + 32);
+//         temp.innerHTML = fahTemp;
+//     }else{
+//         temp.innerHTML = currentTempInCels;
+//     }
+// };
