@@ -4,46 +4,71 @@ randomBtn.onclick = function (){
     win.focus();
 }
 
+//################################################################################################
 
-function potato(lat, long){
-    
-
-   
-    let link = `https://fcc-weather-api.glitch.me/api/current?lon=${long}&lat=${lat}`;
-    var xhr = new XMLHttpRequest();
-    xhr.open('GET', link);
-    xhr.onload = function() {
-        if (this.status === 200) {
-            var data = JSON.parse(xhr.responseText);
-
-            locationn.innerHTML = data.name;
-            let deg = data.main.temp *10;
-            currentTempInCels = Math.round(deg)/10;
-            temp.innerHTML = currentTempInCels;
-            weather.innerHTML = data.weather[0].main;
-            icon.src = data.weather[0].icon;
-
-            console.log(data);
-            console.log("first part");
-        }
-        else {
-            alert('Request failed.  Returned status of ' + xhr.status);
-            console.log("second part");
-        }
-    };
-    xhr.send(null);     
-}
+function searchWiki() {
+    // Clear previous search results
+    $("#search-results").empty();
   
-// mes.onclick = function(){
+    // Perform ajax call to wiki
+    $.ajax({
+      url: 'https://en.wikipedia.org/w/api.php',
+      data: {
+        action: 'query',
+        list: 'search',
+        srsearch: `${$("#search-text").val()}`,
+        srlimit: '10',
+        format: 'json',
+      },
+      dataType: 'jsonp',
+      // SUCCESS
+      success: function(response) {
+        var result = response.query.search;
+        result.forEach(function(res) {
+  
+          //  Building the div that will contain info in res
+          var $div = $("<div>", {
+            class: "wikiResult"
+          });
+  
+          // Heading
+          var $h = $("<h1>");
+          $h.html(res.title);
+  
+          //  Snippet
+          var $p = $("<p>");
+          $p.html(res.snippet);
+          $p.append("...");
+  
+          //Link to wiki
+          var $p2 = $("<p>");
+          $p2.addClass("linkToWiki");
+          var $a = $("<a>", {
+            href: `https://en.wikipedia.org/wiki/${res.title.replace(" ","_")}`,
+            target: "_blank"
+          });
+          $a.text("Read more")
+          $p2.append($a);
+  
+          //  Append to result div
+          $div.append($h);
+          $div.append($p);
+          $div.append($p2);
+  
+          //  Append to results div
+          $("#search-results").append($div);
+        });
+      }
+    });
+  }
+  
+  function searchWikiTitle(title){
     
-//     let currentTempUnit = mes.innerHTML;
-//     let newTempUnit = currentTempUnit == "C" ? "F" : "C";
-//     mes.innerHTML = newTempUnit;
-
-//     if(newTempUnit == "F"){
-//         let fahTemp = Math.round(parseInt(temp.innerHTML)*9 / 5 + 32);
-//         temp.innerHTML = fahTemp;
-//     }else{
-//         temp.innerHTML = currentTempInCels;
-//     }
-// };
+  }
+  
+  $(document).ready(function() {
+    $("#search-button").on("click", function(e) {
+      e.preventDefault();
+      searchWiki();
+    });
+  });
